@@ -27,7 +27,9 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Handle an incoming authentication request.
-     * This is handling authentication request with a parameters of username and password
+     * This is handling authentication request with
+     * a parameters of username and password
+     * 
      */
     public function store(LoginRequest $request): RedirectResponse
     {
