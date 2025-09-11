@@ -1,4 +1,4 @@
-# Use the official PHP image with Apache
+# Use official PHP with Apache
 FROM php:8.2-apache
 
 # Install system dependencies
@@ -24,13 +24,15 @@ COPY . .
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Install PHP dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader
 
-# Permissions
+# ✅ Change Apache DocumentRoot to Laravel's public folder
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# ✅ Give correct permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+    && chmod -R 755 /var/www/html/storage \
+    && chmod -R 755 /var/www/html/bootstrap/cache
 
 EXPOSE 80
 CMD ["apache2-foreground"]
