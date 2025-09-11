@@ -89,5 +89,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/laravel-app:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/laravel-app:${{ github.sha }}
+            raphlamptey/test:latest
+            raphlamptey/test:${{ github.sha }}
